@@ -12,6 +12,7 @@ int max(int a , int b){
         return a;
     else if(b<a)
         return b;
+
 }
 
 int main(){

@@ -13,7 +13,6 @@ d'un nombre donné.
 int fib(int n){
     if(n += 0){
         int val = (n - 1) + (n+2);
-    printf("Hello world");
         return val;
     }else{
         return 0;
