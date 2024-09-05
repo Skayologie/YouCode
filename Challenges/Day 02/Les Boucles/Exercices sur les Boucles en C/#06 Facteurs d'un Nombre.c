@@ -1,15 +1,18 @@
-
 #include <stdio.h>
 int main(){
-    int number , sum = 0;
+    int nmbr , fact ;
 
-    printf("Type The Number : ");
-    scanf("%d",&number);
+    printf("Enter The Number : ");
+    scanf("%d",&nmbr);
 
-    for(int i = 0 ; i <= number ; i++)
-        sum = sum + i;
+    printf("This is All Number Factorial :\n");
+    for(int i = 1;i<=nmbr;i++){
 
-    printf("\nla somme est : %d\n",sum);
+        if(nmbr % i == 0){
+            printf("%d\n",i);
+        }
+
+    }
 
     return 0;
 }
