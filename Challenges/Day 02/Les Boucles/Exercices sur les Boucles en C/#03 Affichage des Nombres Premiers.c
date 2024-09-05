@@ -1,13 +1,19 @@
 #include <stdio.h>
 int main(){
-    int number;
-    printf("Enter The Number : ");
-    scanf("%d",&number);
-    printf("Les nombres premiers de 1 à %d sont : ",number);
-    for(int i = 1;i <= number ; i++){
-        int iSThat = i%2;
-        if(iSThat == 1)
-            printf("%d ",i);
+    int nmbr;
+    printf("Enter The Stop Number : ");
+    scanf("%d",&nmbr);
+    printf("Les nombres premiers : \n");
+    for (int i = 2 ; i < nmbr ; i++ ){
+        int test = 1;
+        for(int j = 2;j<i;j++){
+            if(i%j== 0){
+                test=0;
+            }
+        }
+        if(test == 1){
+            printf("%d\n",i);
+        }
     }
 
     return 0;
