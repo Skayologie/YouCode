@@ -13,8 +13,11 @@ typedef struct{
     int quantity;
 }livres;
 
-livres livre[50];
 
+
+
+livres livre[50];
+// Commands Function
 int commands(){
     system("clear");
     printf("");
@@ -30,6 +33,7 @@ int commands(){
     return choix ;
 }
 
+// Showing Function
 void show(){
     if (counter != 0)
     {
@@ -56,6 +60,7 @@ void show(){
     
 }
 
+// Add Function
 void Add(){
     system("clear");
     printf("Ajoute :\n");
@@ -69,7 +74,7 @@ void Add(){
     scanf("%f",&livre[counter].price);
     printf("Enter Quantity        : ");
     scanf("%d",&livre[counter].quantity);
-    livre[counter].id = counter ;
+    livre[counter].id = counter+1 ;
     counter++;
     printf("\nPress Any Key To Back To Menu ... %c",getchar());
     getchar();
@@ -85,36 +90,29 @@ void delete(){
     int check = 0;
     for(int i = 0;i<counter;i++){
             if (idSupp-1 == livre[i].id){
-                printf("Its Match : %d",i);
-            
-                // strcpy(livre[i].name,livre[i+1].name);
-                // strcpy(livre[i].auteur,livre[i+1].auteur);
-                // livre[i].price = livre[i+1].price;
-                // livre[i].quantity = livre[i+1].quantity;
-                // counter--;
-                // check = 1;
-                
-                livre[i] = livre[i+i];
+                livre[i].id = livre[i+i].id;
+                stccpy(livre[i].name,livre[i+i].name);
+                stccpy(livre[i].auteur , livre[i+i].auteur);
+                livre[i].price = livre[i+i].price;
+                livre[i].quantity = livre[i+i].quantity;
                 counter--;      
                 check = 1;
             }
         }
-        
-
     if (check == 1)
-            printf("Delete Successfully !");
-        else
-            printf("Delete UnSuccessfully !");
+        printf("Delete Successfully !");
+    else
+        printf("Delete UnSuccessfully !");
+
     printf("\nPress Any Key To Back To Menu ... %c",getchar());
     getchar();
     main();
-
 }
 
-//mise a jour
+//Update Function
 void Update(){
     int idUpdate ;
-    printf("Delete :\n");
+    printf("Update :\n");
     printf("\nEnter Book Id Do You Want to Update   :");
     scanf("%d",&idUpdate);
     for(int i = 0;i< counter;i++){
@@ -127,50 +125,15 @@ void Update(){
             printf("Current Price    : %f \n",livre[i].price);
             printf("Current Quantity : %d \n",livre[i].quantity);
             printf("________________________________\n");
-            printf("Do You wan't to update The Name [1 - Y / 2 - N] ? :");
-            scanf("%d",&answer);
-            fflush(stdin);
-            if (answer!=2)
-            {
-                printf("\nEnter Book Name       : ");
-                scanf("%s",&livre[i].name); 
-                answer = 2;
-                check = 1;
-            }
-            fflush(stdin);
-
-            printf("Auteur Name ? :");
-            scanf("%d",&answer);
-            if (answer!=2)
-            {
-                printf("\nEnter Book Auteur       : ");
-                scanf("%s",&livre[i].auteur); 
-                answer = 2;
-            }
-            fflush(stdin);
-
-            printf("Price ? :");
-            scanf("%d",&answer);
-            if (answer!=2)
-            {
-                printf("\nEnter Book price       : ");
-                scanf("%f",&livre[i].price); 
-                answer = 2;
-            }
-            fflush(stdin);
-
-            printf("Quantity ? :");
-            scanf("%d",&answer);
-            if (answer!=2)
-            {
-                printf("\nEntre Quantity       : ");
-                scanf("%d",&livre[i].quantity); 
-                answer = 2;
-            }
+            printf("\nEnter The Name Of New Quantity : ");
+            scanf("%s",&livre[i].name); 
             
-        }
+            printf("\nEntre The New Quantity       : ");
+            scanf("%d",&livre[i].quantity); 
         
         }
+        
+    }
     printf("\nPress Any Key To Back To Menu ... %c",getchar());
     getchar();
     main();
@@ -179,22 +142,59 @@ void Update(){
 
 
 
-    //Total
-    void TotalLivre(){
-        int total = 0;
-        printf("This is Total \n");
-        for (int i = 0; i < counter; i++)
-        {
-            total = total + livre[i].quantity; 
-        }
-        printf("le nombre total de livres en stock %d Livres",total);
-        printf("\nPress Any Key To Back To Menu ... %c",getchar());
-        getchar();
-        main();
+//Total Books Function
+void TotalLivre(){
+    int total = 0;
+    printf("This is Total \n");
+    for (int i = 0; i < counter; i++)
+    {
+        total = total + livre[i].quantity; 
     }
+    printf("le nombre total de livres en stock %d Livres",total);
+    printf("\nPress Any Key To Back To Menu ... %c",getchar());
+    getchar();
+    main();
+}
 
+// Search Function
+void Search(){
+    system("clear");
+    char name[100];
+     if (counter != 0){
+        fflush(stdin);
+        printf("Enter The Book Name : ");
+        gets(name);
+    for(int i = 0; i<counter;i++){
+            if(strcasecmp(name,livre[i].name)==0){
+                printf("Book Founded !\n");
+                printf("Name     : %s\n",livre[i].name);
+                printf("Auteur   : %s\n",livre[i].auteur);
+                printf("price    : %f\n",livre[i].price);
+                printf("quantity : %d\n",livre[i].quantity);
+                printf("Press Any Key To Back ... %c",getchar());
+                getchar();
+                main();
+            }else{
+                printf("Book Not Found !");
+                printf("Press Any Key To Back ... %c",getchar());
+                getchar();
+                main();
+            }
+        }
+        
+        
+    }
+    else{
+            printf("There Is No Book In Library !\nPress Any Key TO Back To Menu ... %c",getchar());
+            getchar();
+            main();
+        }
+}
+
+// The Main Function
 int main(){
 switch(commands()){
+    
 // Add Book //
 case 1:
     Add();
@@ -205,7 +205,7 @@ case 2:
     show();
     break;
 case 3:
-    printf("This Command Under maintenance");
+    Search();
     break;
 case 4:
     Update();
